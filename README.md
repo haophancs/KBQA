@@ -22,36 +22,59 @@
 
 ## Setup
 
+1. Prepare docker and python env
 ```
 docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/haophancs:/workspace nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 cd /workspace
 apt install wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
-```
 
-Now restart container
+# Now restart container
 
-```
 conda create -n kbqa python=3.6 pip
 conda activate kbqa
 pip install -r requirements.txt
 ```
 
 2. Install HDT API:
-
 ```
 git clone https://github.com/webdata/pyHDT.git
 cd pyHDT/
 ./install.sh
+wget
 ```
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
-4. Follow instructions in https://github.com/svakulenk0/hdt_tutorial to extract the list of entities (dbpedia201604_terms.txt) and predicates
-5. Index entities and predicates into ElasticSearch
-6. Download LC-QuAD dataset from http://lc-quad.sda.tech
-7. Import LC-QuAD dataset into MongoDB
+```
+wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
+wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
+```
 
+5. Install HDT-CPP
+```
+git clone https://github.com/rdfhdt/hdt-cpp
+cd hdt-cpp
+apt install autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
+./autogen.sh
+./configure
+make -j2
+make install
+cd ./libhdt/tests/
+make check
+```
+
+6. Extract the list of entities (dbpedia201604_terms.txt) and predicates
+```
+cd /workspace
+hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -u -t dbpedia201604_entities.txt
+hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -t dbpedia201604_terms.txt
+hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_pred.txt
+```
+
+7. Index entities and predicates into ElasticSearch
+8. Download LC-QuAD dataset from http://lc-quad.sda.tech
+9. Import LC-QuAD dataset into MongoDB
 ```
 sudo service mongod start
 ```
