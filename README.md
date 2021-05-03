@@ -22,9 +22,15 @@
 
 ## Setup
 
-It is not trivial to set up the environment. You need to:
+```
+docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/haophancs:/workspace nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+cd /workspace
+apt install wget git curl unzip tmux vim
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+```
 
-1. Create virtual environment and install all dependencies (to install CUDA, TF, Keras and friends follow https://medium.com/@naomi.fridman/install-conda-tensorflow-gpu-and-keras-on-ubuntu-18-04-1b403e740e25)
+Now restart container
 
 ```
 conda create -n kbqa python=3.6 pip
