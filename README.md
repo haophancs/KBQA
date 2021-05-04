@@ -47,6 +47,7 @@ wget
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
 ```
+cd /workspace
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
 ```
