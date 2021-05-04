@@ -40,25 +40,11 @@ pip install -r requirements.txt
 cd ..
 ```
 
-2. Install HDT API:
-```
-git clone https://github.com/webdata/pyHDT.git
-cd pyHDT/
-./install.sh
-```
-
-3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
-```
-cd /mpqa
-wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
-wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
-```
-
-5. Install HDT-CPP
+2. Install HDT-CPP
 ```
 git clone https://github.com/rdfhdt/hdt-cpp
 cd hdt-cpp
-apt install autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
+apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
 ./autogen.sh
 ./configure
 make -j2
@@ -67,17 +53,41 @@ cd ./libhdt/tests/
 make check
 ```
 
-6. Extract the list of entities (dbpedia201604_terms.txt) and predicates
+3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
 ```
-cd /workspace
-hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -u -t dbpedia201604_entities.txt
+cd /mpqa
+mkdir indexing && cd indexing
+wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
+wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
 hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -t dbpedia201604_terms.txt
 hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_predicates.txt
 ```
 
-7. Index entities and predicates into ElasticSearch
-8. Download LC-QuAD dataset from http://lc-quad.sda.tech
-9. Import LC-QuAD dataset into MongoDB
+4. Install ElasticSearch 
+```
+apt install -y openjdk-8-jdk
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+apt install -y apt-transport-https
+echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
+apt update && apt install elasticsearch=5.5.3
+service elasticsearch start
+```
+
+5. Index entities and predicates into ElasticSearch
+```
+cd /mpqa/KBQA/util
+python index.py
+```
+
+6. Download LC-QuAD dataset from http://lc-quad.sda.tech
+```
+cd /mpqa
+mkdir ./lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json
+```
+
+7. Import LC-QuAD dataset into MongoDB
 ```
 sudo service mongod start
 ```
