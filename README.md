@@ -34,8 +34,8 @@ bash Miniconda3-latest-Linux-x86_64.sh
 # Now restart container
 git clone https://github.com/haophancs/KBQA/
 cd KBQA
-conda create -n kbqa python=3.6 pip
-conda activate -y kbqa
+conda create -n -y kbqa python=3.6 pip
+conda activate kbqa
 pip install -r requirements.txt
 cd ..
 ```
@@ -49,7 +49,7 @@ cd pyHDT/
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
 ```
-cd /workspace
+cd /mpqa
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
 ```
