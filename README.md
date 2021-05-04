@@ -26,15 +26,18 @@
 ```
 docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/haophancs:/workspace nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 cd /workspace
-apt install wget git curl unzip tmux vim
+apt update && apt -y upgrade
+apt install -y wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 
 # Now restart container
-
+git clone https://github.com/haophancs/KBQA/
+cd KBQA
 conda create -n kbqa python=3.6 pip
-conda activate kbqa
+conda activate -y kbqa
 pip install -r requirements.txt
+cd ..
 ```
 
 2. Install HDT API:
@@ -42,7 +45,6 @@ pip install -r requirements.txt
 git clone https://github.com/webdata/pyHDT.git
 cd pyHDT/
 ./install.sh
-wget
 ```
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
