@@ -92,7 +92,7 @@ def start_indexing(es, index_name, file_path, ns_filter):
 
 def index_entities(es, KB):
     file_name = "%s_terms" % KB  # file contains a list of 116,591,345 entity URIs with their frequencies in DBpedia KG
-    file_path = "../data/%s.txt" % file_name
+    file_path = "../../indexing/%s.txt" % file_name
     ns_filter = "http://dbpedia.org/"  # process only entities with URIs from the DBpedia namespace 
     index_name = '%se' % KB  # entities index
     start_indexing(es, index_name, file_path, ns_filter)
@@ -100,7 +100,7 @@ def index_entities(es, KB):
 
 def index_predicates(es, KB):
     file_name = "%s_predicates" % KB  # file contains a list of 116,591,345 entity URIs with their frequencies in DBpedia KG
-    file_path = "../data/%s.txt" % file_name
+    file_path = "../../indexing/%s.txt" % file_name
     ns_filter = None  # index all properties 
     index_name = '%sp' % KB   # predicates index
     start_indexing(es, index_name, file_path, ns_filter)
