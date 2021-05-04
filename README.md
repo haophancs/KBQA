@@ -24,8 +24,8 @@
 
 1. Prepare docker and python env
 ```
-docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/haophancs:/workspace nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-cd /workspace
+docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa:/mpqa nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+cd /mpqa
 apt update && apt -y upgrade
 apt install -y wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -72,7 +72,7 @@ make check
 cd /workspace
 hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -u -t dbpedia201604_entities.txt
 hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -t dbpedia201604_terms.txt
-hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_pred.txt
+hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_predicates.txt
 ```
 
 7. Index entities and predicates into ElasticSearch
