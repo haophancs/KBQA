@@ -37,11 +37,11 @@ cd KBQA
 conda create -n -y kbqa python=3.6 pip
 conda activate kbqa
 pip install -r requirements.txt
-cd ..
 ```
 
 2. Install HDT-CPP
 ```
+cd /mpqa
 git clone https://github.com/rdfhdt/hdt-cpp
 cd hdt-cpp
 apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
@@ -87,9 +87,9 @@ wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json
 wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json
 ```
 
-7. Import LC-QuAD dataset into MongoDB
+7. Install MongoDB, import LC-QuAD dataset into MongoDB
 ```
-sudo service mongod start
+service mongod start
 ```
 
 
