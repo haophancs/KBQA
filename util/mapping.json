@@ -3,6 +3,7 @@ curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' 
   "settings": {
     "number_of_shards": 1,
     "number_of_replicas": 0,
+    "max_ngram_diff" : 50,
     "analysis": {
       "analyzer": {
         "default_analyzer": {
