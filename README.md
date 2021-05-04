@@ -39,7 +39,8 @@ conda activate kbqa
 pip install -r requirements.txt
 ```
 
-2. Install HDT-CPP
+2. Install HDT
+ - HDT-CPP:
 ```
 cd /mpqa
 git clone https://github.com/rdfhdt/hdt-cpp
@@ -51,6 +52,11 @@ make -j2
 make install
 cd ./libhdt/tests/
 make check
+```
+ - HDT API:
+```
+pip install pybind11==2.2.4
+pip install hdt==2.2.1
 ```
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
