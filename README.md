@@ -34,7 +34,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 # Now restart container
 git clone https://github.com/haophancs/KBQA/
 cd KBQA
-conda create -n -y kbqa python=3.6 pip
+conda create -n kbqa python=3.6 pip -y
 conda activate kbqa
 pip install -r requirements.txt
 ```
@@ -48,7 +48,7 @@ cd hdt-cpp
 apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
 ./autogen.sh
 ./configure
-make -j2
+make -j16
 make install
 cd ./libhdt/tests/
 make check
@@ -75,7 +75,7 @@ apt install -y openjdk-8-jdk
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 apt install -y apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
-apt update && apt install elasticsearch=5.5.3
+apt update && apt install -y elasticsearch=5.5.3
 service elasticsearch start
 ```
 
@@ -95,7 +95,11 @@ wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json
 
 7. Install MongoDB, import LC-QuAD dataset into MongoDB
 ```
-service mongod start
+mkdir /mpqa/db
+mkdir /mpqa/db/mongod.log
+mongod --dbpath /mpqa/db --fork --logpath /mpqa/db/log
+mongo
+use mpqa
 ```
 
 

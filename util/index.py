@@ -15,7 +15,7 @@ To restart indexing:
 curl -X DELETE "localhost:9200/dbpedia201604e"
 curl -X DELETE "localhost:9200/dbpedia201604p"
 
-2. Put mapping (see mapping.json file)
+2. Put mapping (see mapping.sh file)
 curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' -d'
 ...
 

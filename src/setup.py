@@ -108,21 +108,24 @@ class Mongo_Connector():
         dataset_size = len(docs)
         print ("Inserting %d new docs"%(dataset_size))
         self.col.insert_many(docs)
-        
-    def show_sample(self):
-        pprint.pprint(self.col.find_one())
+
+    def one_sample(self):
+        return self.col.find_one()
 
     def get_all(self, limit=100):
         cursor = self.col.find({}, no_cursor_timeout=True)
         if limit:
             cursor = cursor.limit(limit)
         return cursor
-        
-    def get_sample(self, train=True, limit=100):
+
+    def get_sample(self, train=None, limit=100):
         '''
         Set limit to None to get all docs
         '''
-        cursor = self.col.find({'train': train}, no_cursor_timeout=True).batch_size(1)
+        if train is None:
+            cursor = self.col.find({}, no_cursor_timeout=True).batch_size(1)
+        else:
+            cursor = self.col.find({'train': train}, no_cursor_timeout=True).batch_size(1)
         if limit:
             cursor = cursor.limit(limit)
         return cursor
