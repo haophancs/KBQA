@@ -43,7 +43,7 @@ pip install -r requirements.txt
  - HDT-CPP:
 ```
 cd /mpqa
-git clone https://github.com/rdfhdt/hdt-cpp
+git clone https://github.com/haophancs/hdt-cpp
 cd hdt-cpp
 apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
 ./autogen.sh
@@ -65,8 +65,8 @@ cd /mpqa
 mkdir indexing && cd indexing
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
-hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -t dbpedia201604_terms.txt
-hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_predicates.txt
+../hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -o -t dbpedia201604_terms.txt
+../hdt-cpp/libhdt/tests/dumpDictionary dbpedia2016-04en.hdt -p dbpedia201604_predicates.txt
 ```
 
 4. Install ElasticSearch 
@@ -82,7 +82,8 @@ service elasticsearch start
 5. Index entities and predicates into ElasticSearch
 ```
 cd /mpqa/KBQA/util
-python index.py
+python3 index.py terms
+python3 index.py predicates
 ```
 
 6. Download LC-QuAD dataset from http://lc-quad.sda.tech

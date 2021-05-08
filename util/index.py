@@ -26,6 +26,7 @@ DBpedia201604HDT contains 26,395,358 entities with the URIs starting http://dbpe
 '''
 import io
 import re
+import sys
 import string
 
 from elasticsearch import Elasticsearch
@@ -107,7 +108,10 @@ def index_predicates(es, KB):
 
 
 if __name__ == '__main__':
+    assert sys.argv[1] == "terms" or sys.argv[1] == "predicates"
     KB = 'dbpedia201604'  # dbpedia201604 or wikidata201809
     es = Elasticsearch()
-    index_entities(es, KB)
-    #index_predicates(es, KB)
+    if sys.argv[1] == "terms":
+        index_entities(es, KB)
+    else:
+        index_predicates(es, KB)
