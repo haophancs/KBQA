@@ -25,7 +25,7 @@
 1. Prepare docker and python env
 ```
 mkdir mpqa_new
-docker run --gpus all --publish 8880:8880 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+docker run --gpus all --publish 8888:8888 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 cd /mpqa_new
 apt update && apt -y upgrade
 apt install -y wget git curl unzip tmux vim
