@@ -130,7 +130,7 @@ Follow this guide to run jupyter with ngrok https://towardsdatascience.com/how-t
 
 See notebooks
 
-**Attention:** We have not been imported dataset into MongoDB, follow the 0_preprocessing.ipynb first, set the variable **loaded = False** (it's True by default) to import data
+**Attention:** We have not imported dataset into MongoDB, follow the 0_preprocessing.ipynb first, set the variable **loaded = False** (it's True by default) to import data
 
 ## Benchmark
 
