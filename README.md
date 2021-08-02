@@ -24,8 +24,9 @@
 
 1. Prepare docker and python env
 ```
-docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa:/mpqa nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-cd /mpqa
+mkdir mpqa_new
+docker run --gpus all --publish 8880:8880 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+cd /mpqa_new
 apt update && apt -y upgrade
 apt install -y wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda2-4.3.31-Linux-x86_64.sh
@@ -42,7 +43,7 @@ pip install -r requirements.txt
 2. Install HDT
  - HDT-CPP:
 ```
-cd /mpqa
+cd /mpqa_new
 git clone https://github.com/haophancs/hdt-cpp
 cd hdt-cpp
 apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
@@ -61,7 +62,7 @@ pip install hdt==2.2.1
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
 ```
-cd /mpqa
+cd /mpqa_new
 mkdir indexing && cd indexing
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
@@ -78,29 +79,33 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /e
 apt update && apt install -y elasticsearch=5.5.3
 service elasticsearch start
 ```
+  Change data directory of Elasticsearch
+ - Open ```/etc/elasticsearch/elasticsearch.yml```, set ```path.data```: ```/mpqa_new/elasticsearch/``` 
+ - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa/$NAME```
+ - Run ```chown -R elasticsearch:elasticsearch /mpqa_new/elasticsearch/```
 
 5. Index entities and predicates into ElasticSearch
 ```
-cd /mpqa/KBQA/util
+cd /mpqa_new/KBQA/util
 python3 index.py terms
 python3 index.py predicates
 ```
 
 6. Download LC-QuAD dataset from http://lc-quad.sda.tech
 ```
-cd /mpqa
+cd /mpqa_new
 mkdir ./lcquad
 wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P lcquad
 wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P lcquad
 ```
 
-7. Install MongoDB, import LC-QuAD dataset into MongoDB
+7. Install and run MongoDB service:
+
+   Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-18-04-source
 ```
-mkdir /mpqa/db
-mkdir /mpqa/db/mongod.log
-mongod --dbpath /mpqa/db --fork --logpath /mpqa/db/log
-mongo
-use mpqa
+mkdir /mpqa_new/db
+mkdir /mpqa_new/db/mongod.log
+mongod --dbpath /mpqa_new/db --fork --logpath /mpqa_new/db/log
 ```
 
 
@@ -121,7 +126,11 @@ rm wiki.en.zip
 
 ## Run
 
-see notebooks
+Follow this guide to run jupyter with ngrok https://towardsdatascience.com/how-to-share-your-jupyter-notebook-in-3-lines-of-code-with-ngrok-bfe1495a9c0c
+
+See notebooks
+
+**Attention:** We have not been imported dataset into MongoDB, follow the 0_preprocessing.ipynb first, set the variable **loaded = False** (it's True by default) to import data
 
 ## Benchmark
 
