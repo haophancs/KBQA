@@ -29,8 +29,8 @@ docker run --gpus all --publish 8880:8880 -it --entrypoint bash -v /home/tamnguy
 cd /mpqa_new
 apt update && apt -y upgrade
 apt install -y wget git curl unzip tmux vim
-wget https://repo.anaconda.com/miniconda/Miniconda2-4.3.31-Linux-x86_64.sh
-bash Miniconda2-4.3.31-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh
+bash Miniconda3-py37_4.10.3-Linux-x86_64.sh
 
 # Now restart container
 git clone https://github.com/haophancs/KBQA/
@@ -49,7 +49,7 @@ cd hdt-cpp
 apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
 ./autogen.sh
 ./configure
-make -j16
+make -j32
 make install
 cd ./libhdt/tests/
 make check
@@ -81,7 +81,7 @@ service elasticsearch start
 ```
   Change data directory of Elasticsearch
  - Open ```/etc/elasticsearch/elasticsearch.yml```, set ```path.data```: ```/mpqa_new/elasticsearch/``` 
- - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa/$NAME```
+ - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa_new/$NAME```
  - Run ```chown -R elasticsearch:elasticsearch /mpqa_new/elasticsearch/```
 
 5. Index entities and predicates into ElasticSearch
