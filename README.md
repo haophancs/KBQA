@@ -90,8 +90,8 @@ python3 index.py predicates
 ```
 cd /mpqa
 mkdir ./lcquad
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P lcquad
 ```
 
 7. Install MongoDB, import LC-QuAD dataset into MongoDB
