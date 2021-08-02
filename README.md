@@ -28,8 +28,8 @@ docker run --gpus all -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa:/mpqa nv
 cd /mpqa
 apt update && apt -y upgrade
 apt install -y wget git curl unzip tmux vim
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda2-4.3.31-Linux-x86_64.sh
+bash Miniconda2-4.3.31-Linux-x86_64.sh
 
 # Now restart container
 git clone https://github.com/haophancs/KBQA/
