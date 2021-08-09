@@ -78,6 +78,8 @@ apt install -y apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
 apt update && apt install -y elasticsearch=5.5.3
 service elasticsearch start
+pip uninstall elasticsearch
+pip install elasticsearch==5.5.3
 ```
   Change data directory of Elasticsearch
  - ```mkdir /mpqa_new/elasticsearch/```
