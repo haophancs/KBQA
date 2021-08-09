@@ -25,10 +25,10 @@
 1. Prepare docker and python env
 ```
 mkdir mpqa_new
-docker run --gpus all --publish 8888:8888 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+docker run --gpus all --publish 8888:8888 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 cd /mpqa_new
-apt update && apt -y upgrade
-apt install -y wget git curl unzip tmux vim
+apt-get update && apt-get -y upgrade
+apt-get install -y wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh
 bash Miniconda3-py37_4.10.3-Linux-x86_64.sh
 
@@ -46,7 +46,7 @@ pip install -r requirements.txt
 cd /mpqa_new
 git clone https://github.com/haophancs/hdt-cpp
 cd hdt-cpp
-apt install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
+apt-get install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
 ./autogen.sh
 ./configure
 make -j32
@@ -72,11 +72,11 @@ wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
 
 4. Install ElasticSearch 
 ```
-apt install -y openjdk-8-jdk
+apt-get install -y openjdk-8-jdk
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-apt install -y apt-transport-https
+apt-get install -y apt-get-transport-https
 echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
-apt update && apt install -y elasticsearch=5.5.3
+apt-get update && apt-get install -y elasticsearch=5.5.3
 service elasticsearch start
 pip uninstall elasticsearch
 pip install elasticsearch==5.5.3
