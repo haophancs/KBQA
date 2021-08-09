@@ -80,6 +80,7 @@ apt update && apt install -y elasticsearch=5.5.3
 service elasticsearch start
 ```
   Change data directory of Elasticsearch
+ - ```mkdir /mpqa_new/elasticsearch/```
  - Open ```/etc/elasticsearch/elasticsearch.yml```, set ```path.data```: ```/mpqa_new/elasticsearch/``` 
  - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa_new/$NAME```
  - Run ```chown -R elasticsearch:elasticsearch /mpqa_new/elasticsearch/```
