@@ -126,8 +126,11 @@ rm wiki.en.zip
 
 
 ## Run
+Install jupyter
 
 Follow this guide to run jupyter with ngrok https://towardsdatascience.com/how-to-share-your-jupyter-notebook-in-3-lines-of-code-with-ngrok-bfe1495a9c0c
+
+Run command: ```jupyter notebook --no-browser --ip=0.0.0.0 --port=8888 --allow-root```
 
 See notebooks
 
