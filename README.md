@@ -117,6 +117,7 @@ wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-mult
 ```
 mkdir /mpqa_new/KBQA/data/embeddings
 wget http://magnitude.plasticity.ai/glove/heavy/glove.6B.100d.magnitude -P /mpqa_new/KBQA/data/embeddings
+wget http://magnitude.plasticity.ai/glove/heavy/glove.840B.300d.magnitude -P /mpqa_new/KBQA/data/embeddings
 ```
 
 7. Install and run MongoDB service:
