@@ -94,12 +94,29 @@ python3 index.py terms
 python3 index.py predicates
 ```
 
-6. Download LC-QuAD dataset from http://lc-quad.sda.tech
+6. Download dataset and embeddings
+   
+- LC-QUAD
 ```
-cd /mpqa_new
-mkdir ./lcquad
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P lcquad
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P /mpqa_new/KBQA/data/lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P /mpqa_new/KBQA/data/lcquad
+```
+- QALD
+```
+mkdir /mpqa_new/KBQA/data/qald-7
+mkdir /mpqa_new/KBQA/data/qald-8
+mkdir /mpqa_new/KBQA/data/qald-9
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-train-multilingual.json -P /mpqa_new/KBQA/data/qald-7
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-test-multilingual.json -P /mpqa_new/KBQA/data/qald-7
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-train-multilingual.json -P /mpqa_new/KBQA/data/qald-8
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-test-multilingual.json -P /mpqa_new/KBQA/data/qald-8
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-train-multilingual.json -P /mpqa_new/KBQA/data/qald-9
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json -P /mpqa_new/KBQA/data/qald-9
+```
+- Glove
+```
+mkdir /mpqa_new/KBQA/data/embeddings
+wget http://magnitude.plasticity.ai/glove/heavy/glove.6B.100d.magnitude -P /mpqa_new/KBQA/data/embeddings
 ```
 
 7. Install and run MongoDB service:
