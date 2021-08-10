@@ -56,15 +56,15 @@ class IndexSearch:
     def look_up_by_uri(self, uri, top=1):
         uri = uri.replace("'", "")
         results = self.es.search(index=self.index,
-                              body={"query": {"term": {"uri": uri}}},
+                              body={"query": {"match_phrase": {"uri": uri}}},
                               size=top, doc_type=self.type)['hits']['hits']
         if not results:
             results = self.es.search(index=self.index,
-                              body={"query": {"term": {"uri": uri.replace("–", "-")}}},
+                              body={"query": {"match_phrase": {"uri": uri.replace("–", "-")}}},
                               size=top, doc_type=self.type)['hits']['hits']
             if not results:
                 results = self.es.search(index=self.index,
-                                          body={"query": {"term": {"uri": quote(uri, safe=string.punctuation)}}},
+                                          body={"query": {"match_phrase": {"uri": quote(uri, safe=string.punctuation)}}},
                                           size=top, doc_type=self.type)['hits']['hits']
             
         return results
@@ -77,7 +77,7 @@ class IndexSearch:
 
     def look_up_by_label(self, _id):
         results = self.es.search(index=self.index,
-                                 body={"query": {"term": {"label_exact": _id}}},
+                                 body={"query": {"match": {"label_exact": _id}}},
                                  doc_type=self.type)['hits']['hits']
         return results
 

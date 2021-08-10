@@ -52,7 +52,7 @@ curl -X PUT "localhost:9200/dbpedia201604e" -H 'Content-Type: application/json' 
           }   
         },
         "label_exact": { "type" : "keyword" },
-        "uri": { "type" : "keyword" },
+        "uri": { "type" : "text" },
         "id": { "type" : "keyword" }
       }
     }

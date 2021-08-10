@@ -23,9 +23,9 @@ from setup import *
 from models import *
 
 # paths
-hdt_path = '/mnt/ssd/sv/'
-embeddings_path = "/home/zola/Projects/KBQA/api/resources/embeddings/"
-model_path = '/home/zola/Projects/KBQA/api/resources/models/'
+hdt_path = '/mpqa_new/indexing/'
+embeddings_path = "/mpqa_new/KBQA/data/embeddings/"
+model_path = '/mpqa_new/KBQA/models/'
 
 # KG
 hdt_file = 'dbpedia2016-04en.hdt'

@@ -59,7 +59,7 @@ def uris_stream(index_name, file_path, ns_filter=None, doc_type='terms'):
                 if not line.startswith(ns_filter):
                     continue
             # line template http://creativecommons.org/ns#license;2
-            parse = line.split(';')
+            parse = line.split(';')[:2]
             entity_uri = ';'.join(parse[:-1])
             # skip malformed URIs
             if len(entity_uri) > 150:
