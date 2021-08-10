@@ -56,8 +56,11 @@ make check
 ```
  - HDT API:
 ```
-pip install pybind11==2.2.4
-pip install hdt==2.2.1
+pip install pybind11
+cd /mpqa
+git clone https://github.com/webdata/pyHDT.git
+cd pyHDT/
+./install.sh
 ```
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
