@@ -24,9 +24,9 @@
 
 1. Prepare docker and python env
 ```
-mkdir mpqa_new
-docker run --gpus all --publish 8888:8888 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa_new:/mpqa_new nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
-cd /mpqa_new
+mkdir mpqa
+docker run --gpus all --publish 8888:8888 -it --entrypoint bash -v /home/tamnguyen/tvk/mpqa:/mpqa nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+cd /mpqa
 apt-get update && apt-get -y upgrade
 apt-get install -y wget git curl unzip tmux vim
 wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64.sh
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 2. Install HDT
  - HDT-CPP:
 ```
-cd /mpqa_new
+cd /mpqa
 git clone https://github.com/haophancs/hdt-cpp
 cd hdt-cpp
 apt-get install -y autoconf libtool zlib1g zlib1g-dev pkg-config libserd-0-0 libserd-dev
@@ -65,7 +65,7 @@ cd pyHDT/
 
 3. Download DBPedia 2016-04 English HDT file and its index from http://www.rdfhdt.org/datasets/
 ```
-cd /mpqa_new
+cd /mpqa
 mkdir indexing && cd indexing
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt
 wget http://fragments.dbpedia.org/hdt/dbpedia2016-04en.hdt.index.v1-1
@@ -85,14 +85,14 @@ pip uninstall elasticsearch
 pip install elasticsearch==5.5.3
 ```
   Change data directory of Elasticsearch
- - ```mkdir /mpqa_new/elasticsearch/```
- - Open ```/etc/elasticsearch/elasticsearch.yml```, set ```path.data```: ```/mpqa_new/elasticsearch/``` 
- - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa_new/$NAME```
- - Run ```chown -R elasticsearch:elasticsearch /mpqa_new/elasticsearch/```
+ - ```mkdir /mpqa/elasticsearch/```
+ - Open ```/etc/elasticsearch/elasticsearch.yml```, set ```path.data```: ```/mpqa/elasticsearch/``` 
+ - Open ```/etc/init.d/elasticsearch```, set ```DATA_DIR=/mpqa/$NAME```
+ - Run ```chown -R elasticsearch:elasticsearch /mpqa/elasticsearch/```
 
 5. Index entities and predicates into ElasticSearch
 ```
-cd /mpqa_new/KBQA/util
+cd /mpqa/KBQA/util
 python3 index.py terms
 python3 index.py predicates
 ```
@@ -101,35 +101,35 @@ python3 index.py predicates
    
 - LC-QUAD
 ```
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P /mpqa_new/KBQA/data/lcquad
-wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P /mpqa_new/KBQA/data/lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/train-data.json -P /mpqa/KBQA/data/lcquad
+wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD/data/test-data.json -P /mpqa/KBQA/data/lcquad
 ```
 - QALD
 ```
-mkdir /mpqa_new/KBQA/data/qald-7
-mkdir /mpqa_new/KBQA/data/qald-8
-mkdir /mpqa_new/KBQA/data/qald-9
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-train-multilingual.json -P /mpqa_new/KBQA/data/qald-7
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-test-multilingual.json -P /mpqa_new/KBQA/data/qald-7
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-train-multilingual.json -P /mpqa_new/KBQA/data/qald-8
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-test-multilingual.json -P /mpqa_new/KBQA/data/qald-8
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-train-multilingual.json -P /mpqa_new/KBQA/data/qald-9
-wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json -P /mpqa_new/KBQA/data/qald-9
+mkdir /mpqa/KBQA/data/qald-7
+mkdir /mpqa/KBQA/data/qald-8
+mkdir /mpqa/KBQA/data/qald-9
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-train-multilingual.json -P /mpqa/KBQA/data/qald-7
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/7/data/qald-7-test-multilingual.json -P /mpqa/KBQA/data/qald-7
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-train-multilingual.json -P /mpqa/KBQA/data/qald-8
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/8/data/qald-8-test-multilingual.json -P /mpqa/KBQA/data/qald-8
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-train-multilingual.json -P /mpqa/KBQA/data/qald-9
+wget https://raw.githubusercontent.com/ag-sc/QALD/master/9/data/qald-9-test-multilingual.json -P /mpqa/KBQA/data/qald-9
 ```
 - Glove
 ```
-mkdir /mpqa_new/KBQA/data/embeddings
-wget http://magnitude.plasticity.ai/glove/heavy/glove.6B.100d.magnitude -P /mpqa_new/KBQA/data/embeddings
-wget http://magnitude.plasticity.ai/glove/heavy/glove.840B.300d.magnitude -P /mpqa_new/KBQA/data/embeddings
+mkdir /mpqa/KBQA/data/embeddings
+wget http://magnitude.plasticity.ai/glove/heavy/glove.6B.100d.magnitude -P /mpqa/KBQA/data/embeddings
+wget http://magnitude.plasticity.ai/glove/heavy/glove.840B.300d.magnitude -P /mpqa/KBQA/data/embeddings
 ```
 
 7. Install and run MongoDB service:
 
    Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-18-04-source
 ```
-mkdir /mpqa_new/db
-mkdir /mpqa_new/db/mongod.log
-mongod --dbpath /mpqa_new/db --fork --logpath /mpqa_new/db/log
+mkdir /mpqa/db
+mkdir /mpqa/db/mongod.log
+mongod --dbpath /mpqa/db --fork --logpath /mpqa/db/log
 ```
 
 
